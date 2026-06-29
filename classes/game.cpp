@@ -3,7 +3,7 @@
 #include "constants.h"
 
 Game::Game()
-    : ship(windowWidth / 6, windowHeight / 2) 
+    : ship(windowWidth / 6, windowHeight / 2), direction(1) 
 {
     initializeBlocks();
 }
@@ -26,7 +26,26 @@ void Game::handleInput()
 
 void Game::drawBlocks()
 {
-    int direction = 1;
+    bool changeDirection = false;
+    for (const auto& block : blocks)
+    {
+        if (direction == 1 && (block.posY + block.height) >= windowHeight)
+        {
+            changeDirection = true;
+            break;
+        }
+        else if (direction == -1 && block.posY <= 0)
+        {
+            changeDirection = true;
+            break;
+        }
+    }
+
+    if (changeDirection)
+    {
+        direction *= -1;
+    }
+
     for (auto& block : blocks)
     {
         block.move(1 * direction);

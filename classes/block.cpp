@@ -2,7 +2,7 @@
 #include "raylib.h"
 
 Block::Block(float posX, float posY)
-     :posX(posX), posY(posY), width(10), height(20), color(WHITE) 
+     :posX(posX), posY(posY), width(10), height(20), color(WHITE)
       {}
 
 void Block::draw() const

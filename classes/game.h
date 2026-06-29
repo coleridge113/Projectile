@@ -14,6 +14,7 @@ class Game
     private:
         Ship ship;
         std::vector<Block> blocks;
+        int direction;
 
         void drawBlocks();
         void handleCollision();
