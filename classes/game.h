@@ -1,0 +1,19 @@
+#pragma once
+
+#include "block.h"
+#include "ship.h"
+
+class Game
+{
+    public:
+        Game();
+        void draw();
+        void handleInput();
+
+    private:
+        Ship ship;
+        std::vector<Block> blocks;
+
+        void drawBlocks();
+        void handleCollision();
+};
