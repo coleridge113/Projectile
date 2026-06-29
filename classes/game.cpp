@@ -1,8 +1,6 @@
 #include "game.h"
 #include "ship.h"
 #include "constants.h"
-#include "utils.h"
-#include <iostream>
 
 Game::Game()
     : ship(windowWidth / 6, windowHeight / 2) 
@@ -28,8 +26,10 @@ void Game::handleInput()
 
 void Game::drawBlocks()
 {
+    int direction = 1;
     for (auto& block : blocks)
     {
+        block.move(1 * direction);
         block.draw();
     }
 }
@@ -37,13 +37,11 @@ void Game::drawBlocks()
 void Game::initializeBlocks()
 {
     constexpr int gapX = 40;
-    constexpr int gapY = 10;
+    constexpr int gapY = 20;
     constexpr int height = 20;
     constexpr int width = 10;
-    constexpr int numRows = windowHeight / (gapY + height);
+    constexpr int numRows = (windowHeight / 1.01) / (gapY + height);
     constexpr int numCols = windowWidth * (1 - 1/1.5) / (width + gapX);    
-
-    std::cout << numCols << '\n';
 
     for (int i = 0; i < numRows - 1; ++i)
     {
