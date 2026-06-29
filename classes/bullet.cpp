@@ -2,7 +2,7 @@
 #include "raylib.h"
 
 Bullet::Bullet(float posX, float posY)
-      : posX(posX), posY(posY), width(10), height(5), 
+      : posX(posX), posY(posY), width(10), height(2), 
         color(WHITE), velocity(10)
         {};
 

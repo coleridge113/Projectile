@@ -9,6 +9,7 @@ class Game
         Game();
         void draw();
         void handleInput();
+        void initializeBlocks();
 
     private:
         Ship ship;

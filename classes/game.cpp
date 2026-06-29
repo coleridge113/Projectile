@@ -2,11 +2,12 @@
 #include "ship.h"
 #include "constants.h"
 #include "utils.h"
+#include <iostream>
 
 Game::Game()
     : ship(windowWidth / 6, windowHeight / 2) 
 {
-    blocks.push_back(Block { windowWidth / 1.5, windowHeight / 2 });
+    initializeBlocks();
 }
 
 void Game::draw()
@@ -16,12 +17,6 @@ void Game::draw()
     ship.draw();
     drawBlocks();
     handleCollision();
-
-    if (blocks.size() == 0)
-    {
-        blocks.push_back(Block { windowWidth / 1.5, windowHeight / 2 });
-        blocks.push_back(Block { windowWidth / 1.5, windowHeight / 2 });
-    }
 }
 
 void Game::handleInput()
@@ -35,8 +30,31 @@ void Game::drawBlocks()
 {
     for (auto& block : blocks)
     {
-        block.move(generateRandom(-10, 10));
         block.draw();
+    }
+}
+
+void Game::initializeBlocks()
+{
+    constexpr int gapX = 40;
+    constexpr int gapY = 10;
+    constexpr int height = 20;
+    constexpr int width = 10;
+    constexpr int numRows = windowHeight / (gapY + height);
+    constexpr int numCols = windowWidth * (1 - 1/1.5) / (width + gapX);    
+
+    std::cout << numCols << '\n';
+
+    for (int i = 0; i < numRows - 1; ++i)
+    {
+        for (int j = 0; j < numCols; ++j)
+        {
+            float spawnY = 10 + (gapY + height) * i;
+            float spawnX = (windowWidth / 1.5) + (width + gapX) * j;
+            Block block { spawnX, spawnY };
+            blocks.push_back(block);
+
+        }
     }
 }
 
